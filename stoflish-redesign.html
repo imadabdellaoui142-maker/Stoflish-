@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stoflish — Club &amp; E-Magazine</title>
+<meta name="description" content="Stoflish is a student-run English club and e-magazine at the University of Abou Bekr Belkaïd Tlemcen, Algeria. Workshops, debates, and student-made publishing since 2017.">
+<meta name="theme-color" content="#0E1526">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1526;
+    --ink-soft:#141D35;
+    --ink-card-a:#3B1310;
+    --ink-card-b:#2A1B08;
+    --ink-card-c:#171F38;
+    --line:rgba(242,236,221,0.14);
+    --line-strong:rgba(242,236,221,0.28);
+    --gold:#C9A15C;
+    --gold-soft:#E4C988;
+    --crimson:#A63D33;
+    --crimson-soft:#C15845;
+    --parchment:#F2ECDD;
+    --parchment-dim:#C9CEDE;
+    --slate:#8B93B0;
+
+    --font-display:'Fraunces',serif;
+    --font-body:'Archivo',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+
+    --container:1180px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 85% -10%, rgba(201,161,92,0.08), transparent 60%),
+      radial-gradient(ellipse 800px 600px at -10% 40%, rgba(166,61,51,0.07), transparent 55%),
+      var(--ink);
+    color:var(--parchment);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;margin:0;padding:0;}
+  h1,h2,h3,h4{margin:0;font-family:var(--font-display);font-weight:600;}
+  p{margin:0;}
+  button{font:inherit;background:none;border:none;cursor:pointer;color:inherit;}
+  section{scroll-margin-top:90px;}
+
+  a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px;}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  }
+
+  .wrap{max-width:var(--container);margin-inline:auto;padding-inline:clamp(1.25rem,5vw,3rem);}
+  .skip-link{position:absolute;left:1rem;top:-60px;background:var(--gold);color:var(--ink);padding:.75rem 1.25rem;border-radius:8px;z-index:100;transition:top .2s ease;font-family:var(--font-mono);font-size:.8rem;font-weight:600;}
+  .skip-link:focus{top:1rem;}
+
+  .eyebrow{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--crimson-soft);display:flex;align-items:center;gap:.6rem;}
+  .eyebrow::before{content:'';width:22px;height:1px;background:var(--crimson-soft);flex:none;}
+  .section-title{font-family:var(--font-display);font-weight:600;font-size:clamp(2rem,4.2vw,3rem);margin-top:.75rem;line-height:1.08;}
+
+  .btn{font-family:var(--font-mono);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;padding:.9rem 1.6rem;border-radius:999px;transition:transform .25s ease,background .25s ease,color .25s ease,border-color .25s ease;display:inline-flex;align-items:center;gap:.5rem;white-space:nowrap;}
+  .btn-primary{background:var(--gold);color:var(--ink);border:1px solid var(--gold);font-weight:600;}
+  .btn-primary:hover,.btn-primary:focus-visible{transform:translateY(-2px);background:var(--gold-soft);border-color:var(--gold-soft);}
+  .btn-ghost{border:1px solid var(--line-strong);color:var(--parchment);}
+  .btn-ghost:hover,.btn-ghost:focus-visible{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.is-visible{opacity:1;transform:none;}
+  .stagger>*:nth-child(1){transition-delay:0s;}
+  .stagger>*:nth-child(2){transition-delay:.09s;}
+  .stagger>*:nth-child(3){transition-delay:.18s;}
+  .stagger>*:nth-child(4){transition-delay:.27s;}
+
+  .lattice{height:13px;opacity:.55;background-image:
+    repeating-linear-gradient(45deg, rgba(201,161,92,.55) 0 1.5px, transparent 1.5px 13px),
+    repeating-linear-gradient(-45deg, rgba(201,161,92,.55) 0 1.5px, transparent 1.5px 13px);
+  }
+
+  /* ---------- Header ---------- */
+  .site-header{position:sticky;top:0;z-index:50;padding:1.15rem 0;border-bottom:1px solid transparent;transition:background .3s ease,border-color .3s ease,padding .3s ease;}
+  .site-header.is-scrolled{background:rgba(14,21,38,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom-color:var(--line);padding:.85rem 0;}
+  .site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;}
+  .brand{font-family:var(--font-display);font-weight:700;font-size:1.3rem;letter-spacing:.01em;}
+  .brand span{color:var(--gold);}
+  .nav-links{display:flex;gap:2.1rem;font-family:var(--font-mono);font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;}
+  .nav-links a{position:relative;padding-bottom:5px;color:var(--slate);transition:color .25s ease;}
+  .nav-links a::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .25s ease;}
+  .nav-links a:hover,.nav-links a:focus-visible{color:var(--parchment);}
+  .nav-links a:hover::after,.nav-links a:focus-visible::after{transform:scaleX(1);}
+  .nav-right{display:flex;align-items:center;gap:1.4rem;}
+  .nav-cta{font-family:var(--font-mono);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--gold);color:var(--gold);padding:.6rem 1.15rem;border-radius:999px;transition:background .25s ease,color .25s ease,transform .25s ease;}
+  .nav-cta:hover,.nav-cta:focus-visible{background:var(--gold);color:var(--ink);transform:translateY(-1px);}
+
+  .nav-toggle{display:none;width:42px;height:42px;align-items:center;justify-content:center;border:1px solid var(--line-strong);border-radius:8px;flex:none;}
+  .nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{content:'';display:block;width:18px;height:1.5px;background:var(--parchment);position:relative;transition:transform .25s ease,opacity .25s ease,background .25s ease;}
+  .nav-toggle span::before{position:absolute;top:-6px;}
+  .nav-toggle span::after{position:absolute;top:6px;}
+  .site-header.nav-open .nav-toggle span{background:transparent;}
+  .site-header.nav-open .nav-toggle span::before{transform:translateY(6px) rotate(45deg);background:var(--parchment);}
+  .site-header.nav-open .nav-toggle span::after{transform:translateY(-6px) rotate(-45deg);background:var(--parchment);}
+
+  .mobile-panel{display:none;}
+  @media (max-width:860px){
+    .nav-links,.nav-right .nav-cta{display:none;}
+    .nav-toggle{display:flex;}
+    .mobile-panel{display:block;position:fixed;inset:64px 0 0 0;background:var(--ink);opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .25s ease,transform .25s ease;z-index:49;padding:1.5rem clamp(1.25rem,6vw,3rem);overflow-y:auto;}
+    .site-header.nav-open .mobile-panel{opacity:1;transform:none;pointer-events:auto;}
+    .mobile-panel a{display:block;font-family:var(--font-display);font-size:1.7rem;padding:.85rem 0;border-bottom:1px solid var(--line);}
+    .mobile-panel .btn{margin-top:1.75rem;width:100%;justify-content:center;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;padding:clamp(2rem,5vw,3.5rem) 0 clamp(2.5rem,6vw,4rem);}
+  .cover-frame{position:relative;border:1px solid var(--line);border-radius:22px;padding:clamp(2.25rem,6vw,4.5rem) clamp(1.5rem,6vw,4rem) clamp(2.5rem,6vw,4rem);overflow:hidden;}
+  .crop{position:absolute;width:16px;height:16px;border-color:var(--gold);opacity:.6;}
+  .crop.tl{top:16px;left:16px;border-top:1px solid;border-left:1px solid;}
+  .crop.tr{top:16px;right:16px;border-top:1px solid;border-right:1px solid;}
+  .crop.bl{bottom:16px;left:16px;border-bottom:1px solid;border-left:1px solid;}
+  .crop.br{bottom:16px;right:16px;border-bottom:1px solid;border-right:1px solid;}
+
+  .issue-stamp{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.7rem;}
+  .issue-stamp::before{content:'';width:26px;height:1px;background:var(--gold);}
+
+  .masthead{font-family:var(--font-display);font-weight:800;font-size:clamp(3.1rem,12vw,7.3rem);line-height:.92;letter-spacing:-.01em;margin-top:1.1rem;}
+  .masthead-sub{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.2em;font-size:.82rem;color:var(--slate);margin-top:.85rem;}
+
+  .cover-line{font-family:var(--font-display);font-weight:500;font-style:italic;font-size:clamp(1.5rem,3.7vw,2.4rem);max-width:19ch;margin-top:2.25rem;color:var(--parchment);line-height:1.2;}
+
+  .dek{margin-top:1.4rem;color:var(--parchment-dim);font-size:1.05rem;max-width:52ch;}
+
+  .teasers{margin-top:2.5rem;display:flex;flex-direction:column;gap:.9rem;max-width:540px;}
+  .teaser{display:flex;gap:.85rem;align-items:baseline;font-size:.98rem;}
+  .teaser .arrow{color:var(--crimson-soft);font-family:var(--font-mono);flex:none;}
+
+  .hero-ctas{margin-top:2.6rem;display:flex;gap:1rem;flex-wrap:wrap;}
+
+  .barcode{position:absolute;bottom:clamp(1.25rem,3vw,2.1rem);right:clamp(1.5rem,4vw,3rem);display:flex;align-items:flex-end;gap:2px;opacity:.45;}
+  .barcode span{display:block;width:2px;background:var(--parchment);}
+  .barcode span:nth-child(odd){height:20px;}
+  .barcode span:nth-child(even){height:13px;}
+  .barcode span:nth-child(3n){height:26px;}
+  @media (max-width:640px){.barcode{display:none;}}
+
+  /* ---------- Credits strip ---------- */
+  .credits-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .credits-strip .wrap{padding-inline:0;max-width:var(--container);margin-inline:auto;padding-left:clamp(1.25rem,5vw,3rem);padding-right:clamp(1.25rem,5vw,3rem);display:grid;grid-template-columns:repeat(4,1fr);}
+  .credit{padding:1.6rem clamp(1rem,3vw,2rem);border-left:1px solid var(--line);}
+  .credit:first-child{border-left:none;padding-left:0;}
+  .credit .label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);}
+  .credit .value{font-family:var(--font-display);font-size:1.12rem;margin-top:.45rem;color:var(--parchment);}
+  @media (max-width:760px){
+    .credits-strip .wrap{grid-template-columns:repeat(2,1fr);}
+    .credit{border-left:1px solid var(--line);border-bottom:1px solid var(--line);}
+    .credit:nth-child(odd){border-left:none;padding-left:0;}
+    .credit:nth-child(-n+2){padding-top:1.6rem;}
+  }
+
+  /* ---------- About ---------- */
+  .about{padding:clamp(4rem,8vw,7rem) 0;}
+  .about .wrap{display:grid;grid-template-columns:.85fr 1.4fr;gap:clamp(2rem,5vw,4.5rem);align-items:start;}
+  .about-copy p{color:var(--parchment-dim);font-size:1.04rem;max-width:60ch;}
+  .about-copy p+p{margin-top:1.15rem;}
+  .about-copy .lede{color:var(--parchment);font-size:1.22rem;font-family:var(--font-display);font-weight:400;}
+  @media (max-width:820px){.about .wrap{grid-template-columns:1fr;}}
+
+  /* ---------- TOC / What we do ---------- */
+  .toc{padding:clamp(3.5rem,7vw,6rem) 0;background:var(--ink-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .toc-list{margin-top:2.5rem;border-top:1px solid var(--line);}
+  .toc-item{display:grid;grid-template-columns:3.2rem 1fr auto;gap:1.5rem;align-items:baseline;padding:1.85rem 0;border-bottom:1px solid var(--line);}
+  .toc-num{font-family:var(--font-mono);color:var(--gold);font-size:1rem;}
+  .toc-body h3{font-family:var(--font-display);font-size:1.4rem;font-weight:600;}
+  .toc-body p{color:var(--parchment-dim);margin-top:.5rem;max-width:56ch;font-size:.98rem;}
+  .toc-tag{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);white-space:nowrap;}
+  @media (max-width:640px){.toc-item{grid-template-columns:2.2rem 1fr;}.toc-tag{display:none;}}
+
+  /* ---------- Magazine archive ---------- */
+  .archive{padding:clamp(4rem,8vw,7rem) 0;}
+  .archive-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;}
+  .archive-head p{color:var(--parchment-dim);max-width:42ch;font-size:1.02rem;}
+  .archive-grid{margin-top:3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.25rem,3vw,1.75rem);}
+  .issue-card{position:relative;border-radius:16px;padding:2rem 1.65rem;min-height:320px;display:flex;flex-direction:column;justify-content:flex-end;border:1px solid var(--line);overflow:hidden;transition:transform .35s ease,border-color .35s ease;}
+  .issue-card:hover,.issue-card:focus-within{transform:translateY(-6px);border-color:var(--gold);}
+  .issue-card::before{content:'';position:absolute;inset:0;z-index:0;}
+  .issue-card--a::before{background:linear-gradient(160deg,var(--ink-card-a),#0d0605 72%);}
+  .issue-card--b::before{background:linear-gradient(160deg,var(--ink-card-b),#0c0803 72%);}
+  .issue-card--c::before{background:linear-gradient(160deg,var(--ink-card-c),#080b16 72%);}
+  .issue-card>*{position:relative;z-index:1;}
+  .issue-meta{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-soft);}
+  .issue-title{font-family:var(--font-display);font-weight:700;font-size:1.7rem;margin-top:.6rem;line-height:1.12;}
+  .issue-tags{margin-top:1.3rem;display:flex;flex-wrap:wrap;gap:.4rem;}
+  .issue-tags span{font-size:.7rem;font-family:var(--font-mono);border:1px solid rgba(242,236,221,.25);padding:.32rem .6rem;border-radius:999px;color:var(--parchment);}
+  .archive-more{margin-top:2.5rem;}
+  @media (max-width:900px){.archive-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:640px){.archive-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Community ---------- */
+  .community{padding:clamp(4rem,8vw,7rem) 0;background:var(--ink-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .community .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);align-items:center;}
+  .community-body p{color:var(--parchment-dim);font-size:1.03rem;max-width:52ch;margin-top:1.1rem;}
+  .tag-row{margin-top:1.6rem;display:flex;flex-wrap:wrap;gap:.6rem;}
+  .tag-row span{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;border:1px solid var(--line-strong);padding:.5rem .9rem;border-radius:999px;color:var(--slate);}
+  .circulation-figures{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+  .figure{border-left:1px solid var(--line);padding-left:1.25rem;}
+  .figure .num{font-family:var(--font-display);font-size:clamp(2.1rem,5vw,3.1rem);color:var(--gold);font-weight:700;line-height:1;}
+  .figure .cap{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--slate);margin-top:.5rem;}
+  @media (max-width:820px){.community .wrap{grid-template-columns:1fr;}}
+
+  /* ---------- Join CTA ---------- */
+  .join{padding:clamp(4.5rem,9vw,8rem) 0;text-align:center;}
+  .join .eyebrow{justify-content:center;}
+  .join .eyebrow::before{display:none;}
+  .join .section-title{max-width:16ch;margin-inline:auto;}
+  .join p.sub{color:var(--parchment-dim);max-width:50ch;margin:1.25rem auto 0;font-size:1.05rem;}
+  .join .hero-ctas{justify-content:center;margin-top:2.5rem;}
+
+  /* ---------- Footer ---------- */
+  .site-footer{border-top:1px solid var(--line);padding:2.75rem 0;}
+  .site-footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;}
+  .footer-brand{display:flex;flex-direction:column;gap:.3rem;}
+  .footer-brand strong{font-family:var(--font-display);font-size:1.15rem;}
+  .footer-meta{font-family:var(--font-mono);font-size:.74rem;color:var(--slate);letter-spacing:.03em;}
+  .badge-row{display:flex;gap:.75rem;}
+  .badge{width:40px;height:40px;border:1px solid var(--line-strong);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.02em;color:var(--slate);transition:border-color .25s ease,color .25s ease,transform .25s ease;}
+  .badge:hover,.badge:focus-visible{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">Sto<span>flish</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#toc">What We Do</a>
+      <a href="#magazine">Magazine</a>
+      <a href="#community">Community</a>
+    </nav>
+    <div class="nav-right">
+      <a class="nav-cta" href="https://linktr.ee/Stoflish" target="_blank" rel="noopener noreferrer">Join the Club</a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobile-panel">
+    <a href="#about">About</a>
+    <a href="#toc">What We Do</a>
+    <a href="#magazine">Magazine</a>
+    <a href="#community">Community</a>
+    <a class="btn btn-primary" href="https://linktr.ee/Stoflish" target="_blank" rel="noopener noreferrer">Join the Club</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Hero, staged as a magazine cover -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="cover-frame reveal">
+        <span class="crop tl" aria-hidden="true"></span>
+        <span class="crop tr" aria-hidden="true"></span>
+        <span class="crop bl" aria-hidden="true"></span>
+        <span class="crop br" aria-hidden="true"></span>
+
+        <p class="issue-stamp">Tlemcen, Algeria · Est. 2017</p>
+        <h1 class="masthead">Stoflish</h1>
+        <p class="masthead-sub">Club &amp; E-Magazine</p>
+
+        <p class="cover-line">Where creativity meets opportunity.</p>
+        <p class="dek">A student-run English club at the University of Abou Bekr Belkaïd Tlemcen — building fluency through workshops, debate, and a magazine written entirely by its own members.</p>
+
+        <ul class="teasers stagger">
+          <li class="teaser"><span class="arrow">→</span><span>Workshops &amp; debates built around real conversation</span></li>
+          <li class="teaser"><span class="arrow">→</span><span>Student voices — essays, art and open mics</span></li>
+          <li class="teaser"><span class="arrow">→</span><span>The e-magazine, issue after issue</span></li>
+        </ul>
+
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="https://linktr.ee/Stoflish" target="_blank" rel="noopener noreferrer">Join the Club</a>
+          <a class="btn btn-ghost" href="#magazine">Read the Magazine</a>
+        </div>
+
+        <div class="barcode" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="lattice" aria-hidden="true"></div>
+
+  <!-- Credits / masthead stats -->
+  <section class="credits-strip" aria-label="Club facts">
+    <div class="wrap">
+      <div class="credit">
+        <p class="label">Founded</p>
+        <p class="value">2017</p>
+      </div>
+      <div class="credit">
+        <p class="label">Campus</p>
+        <p class="value">Abou Bekr Belkaïd, Tlemcen</p>
+      </div>
+      <div class="credit">
+        <p class="label">Readership</p>
+        <p class="value">2,205 on Instagram</p>
+      </div>
+      <div class="credit">
+        <p class="label">On the program</p>
+        <p class="value">Workshops, debates &amp; e-magazine</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow">About the club</p>
+        <h2 class="section-title">Fluency, out loud.</h2>
+      </div>
+      <div class="about-copy reveal">
+        <p class="lede">Stoflish began in 2017 with a simple bet: students learn English fastest when they're actually using it.</p>
+        <p>What started as a handful of conversation meetups at the University of Abou Bekr Belkaïd Tlemcen has grown into a full creative community — weekly workshops, open debates, cultural nights, and a biannual e-magazine that turns members' writing, art, and reporting into finished issues.</p>
+        <p>Beginners and fluent speakers work side by side. The only requirement is showing up ready to speak.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we do / Table of contents -->
+  <section class="toc" id="toc">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow">What's inside</p>
+        <h2 class="section-title">Three ways in.</h2>
+      </div>
+      <ul class="toc-list stagger">
+        <li class="toc-item reveal">
+          <span class="toc-num">01</span>
+          <div class="toc-body">
+            <h3>Workshops &amp; Debates</h3>
+            <p>Weekly sessions built around real conversation — structured debate, guided discussion, and plenty of room to get it wrong out loud.</p>
+          </div>
+          <span class="toc-tag">Weekly</span>
+        </li>
+        <li class="toc-item reveal">
+          <span class="toc-num">02</span>
+          <div class="toc-body">
+            <h3>Student Voices</h3>
+            <p>Open mics and creative sessions where members write, perform, and share work they made themselves.</p>
+          </div>
+          <span class="toc-tag">Open sessions</span>
+        </li>
+        <li class="toc-item reveal">
+          <span class="toc-num">03</span>
+          <div class="toc-body">
+            <h3>The E-Magazine</h3>
+            <p>A biannual publication of essays, art, and features — pitched, written, edited, and designed by students.</p>
+          </div>
+          <span class="toc-tag">Biannual</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Magazine archive -->
+  <section class="archive" id="magazine">
+    <div class="wrap">
+      <div class="archive-head reveal">
+        <div>
+          <p class="eyebrow">The e-magazine</p>
+          <h2 class="section-title">Every issue, made by the club.</h2>
+        </div>
+        <p>Twice a year, workshops turn into pages. Selected issues from the archive:</p>
+      </div>
+
+      <div class="archive-grid stagger">
+        <article class="issue-card issue-card--a reveal">
+          <p class="issue-meta">Issue N°06 · Spring 2024 · Special Edition</p>
+          <h3 class="issue-title">Picasso in Algeria</h3>
+          <div class="issue-tags">
+            <span>Cubism in Algeria</span>
+            <span>Les Femmes d'Alger</span>
+            <span>Illustrated by Ayoub Cherif</span>
+          </div>
+        </article>
+
+        <article class="issue-card issue-card--b reveal">
+          <p class="issue-meta">Vol. 10 · Issue 3 · Dec 2023</p>
+          <h3 class="issue-title">Folklore &amp; Identity</h3>
+          <div class="issue-tags">
+            <span>Rachid Taha &amp; Pan-African Identity</span>
+            <span>Algerian Food Culture</span>
+            <span>Moon Knight: Marvel Meets Afro Myth</span>
+          </div>
+        </article>
+
+        <article class="issue-card issue-card--c reveal">
+          <p class="issue-meta">Issue N°07 · Spring 2025</p>
+          <h3 class="issue-title">The Time Capsule</h3>
+          <div class="issue-tags">
+            <span>How Time Changes Perception</span>
+            <span>Children's Letters to the Future</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="archive-more reveal">
+        <a class="btn btn-ghost" href="https://linktr.ee/Stoflish" target="_blank" rel="noopener noreferrer">Browse all issues on Linktree →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community -->
+  <section class="community" id="community">
+    <div class="wrap">
+      <div class="community-body reveal">
+        <p class="eyebrow">Circulation</p>
+        <h2 class="section-title">A growing readership.</h2>
+        <p>Stoflish reaches students well beyond the workshop room — a mix of English learners, writers, and creatives across campus and beyond.</p>
+        <div class="tag-row">
+          <span>Students of English</span>
+          <span>Univ. Abou Bekr Belkaïd Tlemcen</span>
+          <span>Est. 2017</span>
+        </div>
+      </div>
+      <div class="circulation-figures reveal">
+        <div class="figure">
+          <p class="num">2,205</p>
+          <p class="cap">Followers on Instagram</p>
+        </div>
+        <div class="figure">
+          <p class="num">218</p>
+          <p class="cap">Posts &amp; stories published</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Join CTA -->
+  <section class="join" id="join">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow">Get involved</p>
+        <h2 class="section-title">Write the next issue.</h2>
+        <p class="sub">Whether you want to debate, perform, or get published, there's a place for you at Stoflish — new members are always welcome.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="https://linktr.ee/Stoflish" target="_blank" rel="noopener noreferrer">Join the Club</a>
+          <a class="btn btn-ghost" href="https://www.instagram.com/stoflish/" target="_blank" rel="noopener noreferrer">Follow on Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="lattice" aria-hidden="true"></div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <strong>Stoflish</strong>
+      <p class="footer-meta">Club &amp; E-Magazine — Univ. Abou Bekr Belkaïd Tlemcen, Algeria — Est. 2017</p>
+    </div>
+    <div class="badge-row">
+      <a class="badge" href="https://www.instagram.com/stoflish/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+      <a class="badge" href="https://www.facebook.com/stoflish/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+      <a class="badge" href="https://www.linkedin.com/company/stoflish-club" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">IN</a>
+      <!-- TikTok handle wasn't confirmed — routed to Linktree for now, swap in the direct URL when you have it -->
+      <a class="badge" href="https://linktr.ee/Stoflish" target="_blank" rel="noopener noreferrer" aria-label="TikTok, via Linktree">TT</a>
+      <a class="badge" href="https://linktr.ee/Stoflish" target="_blank" rel="noopener noreferrer" aria-label="All links">···</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var header = document.querySelector('.site-header');
+  var toggle = document.querySelector('.nav-toggle');
+  var mobilePanel = document.getElementById('mobile-panel');
+
+  function onScroll(){
+    header.classList.toggle('is-scrolled', window.scrollY > 12);
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive:true });
+
+  toggle.addEventListener('click', function(){
+    var open = header.classList.toggle('nav-open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  mobilePanel.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ header.classList.remove('nav-open'); });
+  });
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var revealEls = document.querySelectorAll('.reveal');
+
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
+    revealEls.forEach(function(el){ io.observe(el); });
+  }
+})();
+</script>
+
+</body>
+</html>
